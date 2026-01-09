@@ -44,7 +44,7 @@
   <div class="wrap">
     <div class="top">
       <div>
-        <div class="title">PHNX • SNAKE (CLEAN v1)</div>
+        <div class="title">PHNX • SNAKE (CLEAN v1.1 LOGO)</div>
         <div class="meta">Funziona su PC + telefono (tap + swipe). Nessuna dipendenza.</div>
       </div>
       <div class="pill">TARGET: 30 punti → sconto</div>
@@ -80,7 +80,7 @@
 
 <script>
 (() => {
-  // preload PHNX logo for food
+  // preload PHNX logo (food)
   const phnxLogo = new Image();
   phnxLogo.src = "logo_phnx.png";
 
@@ -218,15 +218,19 @@
     const CELL = canvas.width / GRID;
     drawGrid();
 
-    // food = PHNX LOGO
+    // food = PHNX logo image
     const fx = food.x * CELL;
     const fy = food.y * CELL;
-    const size = CELL * 0.8;
+
+    const size = CELL * 0.92;      // make it big and readable
     const offset = (CELL - size) / 2;
 
     if (phnxLogo.complete && phnxLogo.naturalWidth > 0) {
+      // crisp rendering
+      ctx.imageSmoothingEnabled = true;
       ctx.drawImage(phnxLogo, fx + offset, fy + offset, size, size);
     } else {
+      // fallback while loading
       ctx.fillStyle = FOOD;
       ctx.beginPath();
       ctx.arc(fx + CELL/2, fy + CELL/2, CELL * 0.22, 0, Math.PI * 2);
