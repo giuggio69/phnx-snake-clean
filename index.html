@@ -80,7 +80,7 @@
 
 <script>
 (() => {
-  // === PRELOAD PHNX LOGO FOR FOOD ===
+  // preload PHNX logo for food
   const phnxLogo = new Image();
   phnxLogo.src = "logo_phnx.png";
 
@@ -218,23 +218,15 @@
     const CELL = canvas.width / GRID;
     drawGrid();
 
-    // FOOD = LOGO PHNX (preloaded)
+    // food = PHNX LOGO
     const fx = food.x * CELL;
     const fy = food.y * CELL;
-
-    const size = CELL * 0.75;
+    const size = CELL * 0.8;
     const offset = (CELL - size) / 2;
 
     if (phnxLogo.complete && phnxLogo.naturalWidth > 0) {
-      ctx.drawImage(
-        phnxLogo,
-        fx + offset,
-        fy + offset,
-        size,
-        size
-      );
+      ctx.drawImage(phnxLogo, fx + offset, fy + offset, size, size);
     } else {
-      // fallback circle while loading
       ctx.fillStyle = FOOD;
       ctx.beginPath();
       ctx.arc(fx + CELL/2, fy + CELL/2, CELL * 0.22, 0, Math.PI * 2);
