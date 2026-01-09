@@ -214,12 +214,25 @@
     const CELL = canvas.width / GRID;
     drawGrid();
 
-    // food
-    const fx = food.x*CELL, fy = food.y*CELL;
-    ctx.fillStyle = FOOD;
-    ctx.beginPath();
-    ctx.arc(fx+CELL/2, fy+CELL/2, CELL*0.22, 0, Math.PI*2);
-    ctx.fill();
+    // FOOD = LOGO PHNX
+    const fx = food.x * CELL;
+    const fy = food.y * CELL;
+
+    if (!window.phnxLogo) {
+      window.phnxLogo = new Image();
+      window.phnxLogo.src = "logo_phnx.png";
+    }
+
+    const size = CELL * 0.75;
+    const offset = (CELL - size) / 2;
+
+    ctx.drawImage(
+      window.phnxLogo,
+      fx + offset,
+      fy + offset,
+      size,
+      size
+    );
 
     // snake
     for (let i=0;i<snake.length;i++){
