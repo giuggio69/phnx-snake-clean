@@ -80,6 +80,10 @@
 
 <script>
 (() => {
+  // === PRELOAD PHNX LOGO FOR FOOD ===
+  const phnxLogo = new Image();
+  phnxLogo.src = "logo_phnx.png";
+
   const canvas = document.getElementById("c");
   const ctx = canvas.getContext("2d");
 
@@ -214,25 +218,28 @@
     const CELL = canvas.width / GRID;
     drawGrid();
 
-    // FOOD = LOGO PHNX
+    // FOOD = LOGO PHNX (preloaded)
     const fx = food.x * CELL;
     const fy = food.y * CELL;
-
-    if (!window.phnxLogo) {
-      window.phnxLogo = new Image();
-      window.phnxLogo.src = "logo_phnx.png";
-    }
 
     const size = CELL * 0.75;
     const offset = (CELL - size) / 2;
 
-    ctx.drawImage(
-      window.phnxLogo,
-      fx + offset,
-      fy + offset,
-      size,
-      size
-    );
+    if (phnxLogo.complete && phnxLogo.naturalWidth > 0) {
+      ctx.drawImage(
+        phnxLogo,
+        fx + offset,
+        fy + offset,
+        size,
+        size
+      );
+    } else {
+      // fallback circle while loading
+      ctx.fillStyle = FOOD;
+      ctx.beginPath();
+      ctx.arc(fx + CELL/2, fy + CELL/2, CELL * 0.22, 0, Math.PI * 2);
+      ctx.fill();
+    }
 
     // snake
     for (let i=0;i<snake.length;i++){
